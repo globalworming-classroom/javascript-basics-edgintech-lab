@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Variables</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Variables</h1>
+Variables are places where we store values. We declare them with <i>let</i> or <i>const</i> and can set and read variables.
+<pre>
+    <code>const greeting = 'hello';
+let name = 'world'
+// you can try out and see the logs
+// when execution this code in your browsers console
+console.log(greeting, name)
+// -> hello world</code>
+</pre>
+<i>const</i> declares variables that can't be changed. Declared with <i>let</i>, you can reassign them
+<pre>
+    <code>const greeting = 'hello';
+greeting = 'hi'
+// -> Uncaught TypeError: Assignment to constant variable</code>
+    <code>let name = 'Fury';
+console.log(name)
+// -> Fury
+name = 'Peter'
+console.log(name)
+// -> Peter
+</code>
+</pre>
+use <i>const</i> wherever possible, there rarely is a need to reassign variables and reassigning can be confusing for the reader.
+
+<h3>Your Task:</h3>
+<span>edit the script block of this file so villain and hero have different names</span><br>
+<h4>hero: <span id="heroId"></span></h4>
+<h4>villain: <span id="villainId"></span></h4>
+
+<script type="application/javascript">
+    const task = () => {
+        const villain = "Dr. Evil"
+        let hero = "you"
+        // FIXME evil reassign magic
+        hero = villain
+        render("heroId", hero)
+        render("villainId", villain)
+    };
+</script>
+<script src="global.js"></script>
+<script src="1-variables.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./2-types.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

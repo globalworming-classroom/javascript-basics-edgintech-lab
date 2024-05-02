@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error Handling 5</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+
+<body onload="runCatching(task)">
+<h1>Error Handling</h1>
+It is often a good idea to create specific Errors for your domain. Some frameworks might also come with their own model already.
+<pre>
+<code class="language-javascript">class ServerError extends Error {}
+class ClientError extends Error {}
+
+const handle = (e) => {
+    if (e instanceof ServerError) {
+        console.error(e)
+        return "something went wrong"
+    }
+    if (e instanceof ClientError) {
+        console.warn(e)
+        return "you did something wrong: " + e.message
+    }
+    // not sure how to handle, throw again
+    console.error(e)
+    throw e
+}
+
+const get = (id) =>  {
+    try {
+        if (id <= 0) { throw new ClientError("unexpected id") }
+        return "success"
+    } catch (e) {
+        return handle(e)
+    }
+}
+
+console.log(get(1))
+// -> success
+console.log(get(-1))
+// -> you did something wrong: unexpected id
+</code>
+</pre>
+
+<h3>Your Task:</h3>
+<span>edit the script block of this file to throw an Error</span><br>
+<h4>caught: <span id="exception"></span></h4>
+<span id="message" class="error"></span>
+
+<script type="application/javascript">
+    class ServerError extends Error {
+        constructor(message) {
+            super(message);
+            this.name = "ServerError"
+        }
+    }
+    class DatabaseError extends Error {
+        constructor(message) {
+            super(message);
+            this.name = "DatabaseError"
+        }
+    }
+
+    const task = () => {
+        try {
+            throw new DatabaseError()
+        } catch (e) {
+            // FIXME on database errors we should throw a generic server error
+            console.log(e)
+        }
+    };
+</script>
+
+<script src="global.js"></script>
+<script src="12-error-2.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./12-error-3.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

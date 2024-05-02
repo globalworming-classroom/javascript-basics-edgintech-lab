@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Operators</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Operators</h1>
+Operators invoke special functions. Like <i>typeof</i> operator resulting in the type of that value being returned. There are many operators, like <i>assignment operators</i> like <i>= +=</i> ...
+<pre>
+<code class="language-javascript">let i = 1
+i *= 5 // same as i = i * 5
+console.log(i) // -> 5
+</code>
+</pre>
+<i>arithmetic operators</i> like <i>+ - / * % ++</i> ...
+<pre>
+<code class="language-javascript">let i = 1
+console.log(i) // -> 1
+console.log(++i) // -> 2
+console.log(++i / 2) // -> 1.5
+
+</code>
+<code class="language-javascript">
+const parsedFloat = parseFloat("11.5")
+console.log(parsedFloat, typeof parsedFloat) // -> 11.5, 'number'
+const parsedInt = parseInt("11.5")
+console.log(parsedInt, typeof parsedInt) // -> 11, 'number'
+</code>
+</pre>
+
+<h3>Your Task:</h3>
+<span>edit the script block of this file, add or remove things so max 99 willpower are needed</span><br>
+<h4>Willpower needed today: <span id="willpower"></span></h4>
+<script type="application/javascript">
+    const task = () => {
+        let todaysWillpowerNeeded = 0
+        // some things need willpower
+        const cleaning = 70;
+        const work = 30;
+        const exercising = 40;
+        // some things restore willpower
+        const tee = -10;
+        const sweets = -5
+
+
+        todaysWillpowerNeeded += cleaning
+        todaysWillpowerNeeded += work
+        todaysWillpowerNeeded += exercising
+        todaysWillpowerNeeded += tee * 2
+        todaysWillpowerNeeded += sweets * 2
+        render(todaysWillpowerNeeded);
+    };
+
+</script>
+
+
+<script src="global.js"></script>
+<script src="3-operators.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./3-operators-2.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

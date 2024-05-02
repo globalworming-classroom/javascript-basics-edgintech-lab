@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Control Flow</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Loops</h1>
+Repeat things a lot, with variants how. While loops are the simplest, just repeat something as long as a provided condition is true
+<pre>
+<code class="language-javascript">while (true) { // endless loop, don't execute :)
+    console.log("say hi")
+}
+</code>
+</pre>
+The condition is checked first and if true, the inner block is executed. Execution stops when <i>courses</i> reaches <i>10</i>
+<pre>
+<code class="language-javascript">let courses = 0
+while (courses < 10) {
+    console.log("subscribe")
+    courses++
+}
+</code>
+</pre>
+You can exit loops early with the <i>break</i> keyword
+<pre>
+<code class="language-javascript">
+let courses = 0
+while (true) {
+    courses++
+    break
+}
+console.log(courses) // -> 1
+</code>
+</pre>
+
+<h3>Your Task:</h3>
+<span>edit the script block of this file so all birds are removed </span><br>
+<h4>
+    <span class="bird"><img src="./bird.svg" alt="bird" /></span>
+    <span class="bird"><img src="./bird.svg" alt="bird" /></span>
+    <span class="bird"><img src="./bird.svg" alt="bird" /></span>
+    <span class="bird"><img src="./bird.svg" alt="bird" /></span>
+</h4>
+<pre class="error"></pre>
+
+<script type="application/javascript">
+
+    const task = () => {
+        while ( numberOfBirds() > 2 ) {
+            removeBird();
+            break
+        }
+    };
+
+</script>
+<script src="global.js"></script>
+<script src="4-control.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./4-control-2.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

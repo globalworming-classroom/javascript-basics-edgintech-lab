@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Control Flow 3</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Loops</h1>
+<i>For</i> loops have multiple components. After the <i>for</i> keyword, in the parentheses, we start with an initialization block followed by a condition check. If the condition resolves to true, the inner block is executed and then the last statement in the parentheses is executed.
+<pre>
+<code class="language-javascript">for (
+    // 1. init
+    let counter = 0;
+    // 2. check condition
+    counter <= 6;
+    // 4. execute after inner code block
+    counter++
+) {
+    // 3. code block
+    console.log(counter);
+}
+// -> 0, 1, ..., 6
+</code>
+</pre>
+We did all that with while-loops too, it just looked a bit different.
+<pre>
+<code class="language-javascript">// 1. init
+let counter = 0
+while (
+    // 2. check condition
+    counter <= 6
+) {
+    // 3. code block
+    console.log(counter);
+    // 4. execute at the end
+    counter++
+}
+</code>
+</pre>
+All the blocks in the parentheses of a for loop are actually optional, you can use some or neither of these.
+<pre>
+<code class="language-javascript">// endless loop
+for (;;) {
+    console.log("executing block");
+}
+</code>
+</pre>
+There are fancy things you can do but normally don't, like multiple variables involved, more complex conditions and after loop statements...
+<pre>
+<code class="language-javascript">
+for (let i = 3, j = 0; i < 10; i += 6, j++) {
+  console.log(i, j);
+}
+// -> 3 0
+// -> 9 1
+</code>
+</pre>
+
+<h3>Your Task:</h3>
+<span>edit the script block of this file so all birds are removed </span><br>
+<h4>
+    <span class="bird"><img src="./bird.svg" alt="bird" /></span>
+    <span class="bird"><img src="./bird.svg" alt="bird" /></span>
+    <span class="bird"><img src="./bird.svg" alt="bird" /></span>
+    <span class="bird"><img src="./bird.svg" alt="bird" /></span>
+</h4>
+
+<script type="application/javascript">
+    const task = () => {
+        // FIXME loop doesn't run because condition is always false
+        for (let i = 0; i > 0; i = numberOfBirds()) {
+            break
+            removeBird()
+        }
+    };
+
+</script>
+<script src="global.js"></script>
+<script src="4-control.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./4-control-4.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

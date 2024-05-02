@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Arrays 2</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Arrays</h1>
+Arrays hold values. The keys (or properties) to get these values are the string representations of integers greater or equal zero.
+<pre>
+<code class="language-javascript">
+const array = ["battery", "horse", "staple"];
+console.log(array[0])
+// -> "battery"
+console.log(array[2])
+// -> "staple"
+// or by string representation of number
+console.log(array["1"])
+// -> "horse"
+</code>
+</pre>
+Fun fact: you can set other properties as well. You shouldn't though :)
+<pre>
+<code class="language-javascript">
+const array = ["battery", "horse", "staple"];
+array[-1] = "minusOne"
+array["someProperty"] = "someValue"
+</code>
+</pre>
+
+
+You can loop through Array values in many ways, the more common ones are
+<pre>
+<code class="language-javascript">// for loop with index based access
+const array = ["a", "b", "c"]
+for (let i = 0; i < array.length; i++) {
+    console.log(`${i}: ${array[i]}`)
+}
+</code>
+</pre>
+<pre>
+<code class="language-javascript">// for-of loop
+const array = ["a", "b", "c"]
+for (const value of array) {
+    console.log(value)
+}
+</code>
+</pre>
+or if you want to make it especially hard for yourself, use the array iterator
+<pre>
+<code class="language-javascript">const array = ["a", "b", "c"]
+const iterator = array.keys()
+let next = iterator.next();
+while (!next.done) {
+    console.log(`${next.value}: ${array[next.value]}`)
+    next = iterator.next()
+}
+</code>
+</pre>
+
+<h3>Your Task:</h3>
+<span>edit the script block of this file so a food array is created</span><br>
+<h3>Food:</h3>
+<div class="foods"></div>
+
+<script type="application/javascript">
+    const task = () => {
+        const foods = ["apple", "banana", "peach"]
+        // FIXME there is sooo much wrong with this for loop
+        for (let i = -1; i < [,,,]; i++) {
+            render(foods[i])
+            break
+        }
+    };
+</script>
+<script src="global.js"></script>
+<script src="5-arrays.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./6-objects.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

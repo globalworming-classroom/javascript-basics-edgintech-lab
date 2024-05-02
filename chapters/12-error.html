@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error Handling</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Error Handling</h1>
+When talking to other parties (e.g. via http requests), you are getting responses you cannot control or intermittent
+connection errors. These problems lead to exceptions being <i>throw</i>n.
+<pre>
+<code class="language-javascript">// should return a hero with name but returns null
+const erroneousGetHero = () => null
+const hero = erroneousGetHero()
+console.log(hero.name)
+// -> TypeError: Cannot read properties of null (reading 'name')
+</code>
+</pre>
+You can <i>throw</i> exceptions yourself to communicate errors to your client. You can throw primitive values but often
+you throw <i>Error</i> objects.
+<pre>
+<code class="language-javascript">throw "some message"
+// -> Uncaught some message
+throw new Error("some message")
+// -> VM481:1 Uncaught Error: some message
+//    at &lt;anonymous&gt;:1:7
+</code>
+</pre>
+Throwing an exception will end the program unless it is caught with the <i>catch</i> keyword. A <i>try-catch</i> block
+allows you to define a code block where any exception can be handled gracefully.
+
+<pre>
+<code class="language-javascript">const erroneousGetHero = () => {
+    throw "connection failed";
+}
+const erroneousGetVillain = () => {
+    throw new Error("connection failed");
+}
+
+const handleError = e => {
+    // Errors come with some default properties
+    if (e instanceof Error) {
+        console.log("name:", e.name)
+        console.log("message:", e.message)
+        console.log("stack:", e.stack)
+    } else {
+        console.log("error:", e)
+    }
+};
+
+try {
+    erroneousGetHero()
+} catch (e) {
+    handleError(e)
+    // -> handle error: connection failed
+}
+
+try {
+    erroneousGetVillain()
+} catch (e) {
+    handleError(e)
+    // -> name: Error
+    //    message: connection failed
+    //    stack: Error: connection failed
+    //      at erroneousGetVillain ...
+}
+</code>
+</pre>
+
+After catching an error, you can throw it or some other error. Those will be picked up by outer catch blocks if present. Uncaught exceptions will end the program.
+<pre>
+<code class="language-javascript">try {
+    try {
+        const x = {}
+        x.name.length
+    } catch (e) {
+        // logging here, handle later
+        console.error("logging the error in this error handler", e)
+        throw e
+    }
+} catch (e) {
+    console.log("now handling", e)
+}</code>
+</pre>
+
+
+<h3>Your Task:</h3>
+<span>edit the script block of this file to throw an Error</span><br>
+<h4>caught: <span id="exception"></span></h4>
+
+<script type="application/javascript">
+    const task = () => {
+        // FIXME throw a new Error
+    };
+</script>
+
+<script src="global.js"></script>
+<script src="12-error.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./12-error-2.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

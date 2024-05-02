@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error Handling 4</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+
+<body onload="setTimeout(showNext, 2000)">
+<h1>Async Error Handling</h1>
+When you work with async/await, things tend to look normal again
+<pre>
+<code class="language-javascript">const failingGet = () => {
+    return new Promise((resolve, reject) => reject("failed"))
+}
+
+const doStuff = async () => {
+    try {
+        await failingGet()
+    } catch (e) {
+        console.error("caught" , e)
+    } finally {
+        console.log("cleanup")
+    }
+}
+doStuff()
+// -> caught failed
+// -> cleanup</code>
+</pre>
+<script src="global.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden" >
+    <a href="./fixme">FIXME, add more chapters :) </a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

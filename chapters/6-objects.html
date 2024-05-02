@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Objects</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Objects</h1>
+Arrays are objects. Objects have string properties, Arrays are usually just limited to strings of positive integers.
+<pre>
+<code class="language-javascript">const array = ["first value"];
+array["1"] = "second value"
+console.log(typeof array)
+// -> object
+
+const object = {"a property": "a value"}
+object["another property"] = "another value"
+object.thirdProperty = "third value"
+console.log(object)
+// -> {a property: 'a value', another property: 'another value', thirdProperty: 'third value'}
+</code>
+</pre>
+
+In comparison to arrays, objects aren't really built for iteration over their properties, you can do it though if need be. Use for-in loop or get an array with key-value pairs
+<pre>
+<code class="language-javascript">
+for (const property in object) {
+  console.log(`${property}: ${object[property]}`);
+}
+// -> a property: a value
+// -> anotherProperty: another value
+console.log(Object.entries(object))
+// -> 0: ['a property', 'a value']
+//    1: ['another property', 'another value']
+//    2: ['thirdProperty', 'third value']
+</code>
+</pre>
+So, arrays are for keeping track of multiple things, objects are for describing a thing, what it has and does and how to interact with it. This is done by setting properties, string keys. Set values, set other objects or functions. ( We haven't talked about functions yet or what 'this' is. Functions are reusable code blocks, 'this' here referring to the object, so you can access properties)
+
+<pre>
+<code class="language-javascript">
+const dragon = {
+    heads: 1,
+    behead: function () {
+        this.heads = 0
+    }
+}
+const hydra = {
+    heads: 1,
+    behead: function () {
+        this.heads++
+    }
+}
+</code>
+</pre>
+
+<h3>Your Task:</h3>
+<span>edit the script block of this file so the pizza is correct</span><br>
+<h4>Pizza:</h4>
+<div class="pizza"></div>
+
+<script type="application/javascript">
+    const task = () => {
+        const pizza = {
+            name: "vegetaria",
+            slices: 4
+        }
+        pizza.size = "small"
+        render(pizza);
+    };
+</script>
+<script src="global.js"></script>
+<script src="6-objects.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./7-maps.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Operators 2</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Operators</h1>
+<i>Logical Operators</i> work on booleans, so <i>true</i> and <i>false</i> values. There are also assignment shorthands for these.
+<pre>
+<code class="language-javascript">let stay = true;
+const safe = false;
+// ||, logical OR
+console.log(stay || safe) // -> true
+// &&=, logical AND with assignment
+stay &&= safe;
+console.log(stay) // -> false
+// !, logical NOT
+console.log(!stay) // -> true
+</code>
+</pre>
+<i>Comparison Operators</i> like <i>&lt;= &gt; == </i> compare values. <i>===</i> is checking for type equality too.
+<pre>
+<code class="language-javascript">console.log(1 > 2) // -> false
+console.log(2 === 2) // -> true
+console.log(2 == "2") // -> true
+console.log(2 === "2") // -> false
+console.log(10 <= 10) // -> true
+</code>
+</pre>
+Some maybe unexpected results:
+<pre>
+<code class="language-javascript">// you can compare alphabetical order
+console.log("a" < "b") // -> true
+// but all the uppercase letters are "smaller" than lowercase ones
+console.log("a" < "A") // -> false
+// NaN is not equal to NaN
+console.log(NaN == NaN) // -> false</code>
+</pre>
+
+<h3>Your Task:</h3>
+<span>edit the script block of this file, change the comparison operations to make sure we eat pizza today</span><br>
+<h4>eat pizza today?</h4>
+<h4><span id="eat"></span>!</h4>
+
+<script type="application/javascript">
+    const task = () => {
+        const hungry = false
+        const money = 10
+        const eatPizza = hungry && (money > 10)
+        render(eatPizza);
+    };
+</script>
+
+
+<script src="global.js"></script>
+<script src="3-operators-2.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./3-operators-3.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Control Flow 3</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="setTimeout(() => {document.getElementById('next').hidden = false}, 2000)">
+<h1>Loops</h1>
+there are a lot more loops. Like these that are for going through Array entries and Object properties. We have not yet talked about arrays, so let's do that soon :)
+
+<pre>
+<code class="language-javascript">const array = ['a', 1, true];
+for (const element of array) {
+  console.log(element);
+}
+// -> 'a'
+// -> 1
+// -> true
+</code>
+<code class="language-javascript">const array = ['a', 1, true];
+array.forEach(element => console.log(element))
+// -> 'a'
+// -> 1
+// -> true
+</code>
+<code class="language-javascript">const object = { a: 1, b: 2, c: 3 };
+for (const property in object) {
+  console.log(`${property}: ${object[property]}`);
+}
+// -> "a: 1"
+// -> "b: 2"
+// -> "c: 3"
+</code>
+</pre>
+
+<div id="displayOnSuccess" hidden="hidden">
+    <a href="./4-control-5.html">next exercise</a>
+</div>
+
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./4-control-3.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

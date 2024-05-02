@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Maps</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="setTimeout(() => {showNext()}, 2000)">
+<h1>Maps</h1>
+to reiterate: Arrays, Maps and Objects are Objects
+<pre>
+<code class="language-javascript">typeof Array(); // -> object
+typeof new Map(); // -> object
+typeof Object(); // -> object
+</code>
+</pre>
+with Arrays we use properties to keep track of multiple things, build lists, queues, stacks, etc.
+<pre>
+<code class="language-javascript">
+const a = ["these", "are", "multiple", "strings"];
+a.hasOwnProperty("3") // -> true
+a.hasOwnProperty(4) // -> false
+</code>
+</pre>
+With Objects we use properties to describe things
+<pre>
+<code class="language-javascript">
+const hero = {
+    "name": "atom",
+    "powers": ["split", "fuse"]
+}
+</code>
+</pre>
+But properties are strings, so distinguishing between objects that have the same string representation is not possible
+<pre>
+<code class="language-javascript">// lets try to link a hero to their arch enemy
+const atom = {"name": "atom"};
+const thunder = {"name": "thunder"};
+const antimatter = {"name": "antimatter", evil: true };
+const lightning = {"name": "lightning", evil: true };
+const heroesToArchEnemy = {};
+heroesToArchEnemy[atom] = antimatter;
+heroesToArchEnemy[thunder] = lightning;
+// does not work because object.toString is "[object Object]"
+heroesToArchEnemy // -> "[object Object]": {name: 'lightning', evil: true}
+</code>
+</pre>
+
+<script src="global.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./7-maps-2.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Functions</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Functions</h1>
+To make our code more readable (hide details behind a meaningful name), maintainable (don't repeat yourself,
+structure large programs). To create a callable function, assign a function to a variable
+<pre>
+<code class="language-javascript">const randomHero = function () {
+    console.log("calling for random hero")
+}
+</code>
+or an arrow function to a variable
+</pre>
+<pre>
+<code class="language-javascript">const randomHero = () => {
+    console.log("calling for random hero")
+}
+</code>
+</pre>
+The functions body (between the curly braces <i>{ }</i>) are the statements that are executed when a function is
+invoked. Functions may have parameters defined within parentheses <i>( )</i>
+<pre>
+<code class="language-javascript">const randomHero = function () {
+    console.log("calling for random hero")
+}
+// invoke it by calling
+randomHero()
+
+const findHeroByPowerLevel = function (powerLevel) {
+    console.log("searching for power level " + powerLevel)
+}
+const powerLevel = 4
+findHero(powerLevel)
+</code>
+</pre>
+
+<h3>Your Task:</h3>
+<span>edit the script block of this file to create the necessary function</span><br>
+<h4>Global Evil Organisation Database: Hero "Thunder"</h4>
+<h5>your options:</h5>
+<ul class="features"></ul>
+
+<script type="application/javascript">
+
+    function sendOnVacation(hero) {
+        console.log("vacation for " + hero.name)
+    }
+
+    const call = function (hero) {
+        console.log("calling " + hero.name)
+    }
+    // FIXME define a function
+    const notifyAuthorities = undefined
+
+    const task = () => {
+        const features = { call, notifyAuthorities, sendOnVacation }
+        render(features);
+    };
+
+
+</script>
+
+<script src="global.js"></script>
+<script src="8-functions.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./8-functions-2.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM 2</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(app.render)">
+<h1>DOM</h1>
+You can use the DOM API to interact with your app and there are many test frameworks that do that. Using the Selenium
+Webdriver to click on an element will most likely result in a click event being dispatched.
+<pre>
+<code class="language-javascript">element.dispatchEvent(new Event('click'));
+// or just
+element.click()
+</code>
+</pre>
+So what you can do is using this DOM API to write tests scripts for you browser based applications
+
+<pre>
+<code class="language-javascript">const switchButton = () => document.querySelectorAll("#app button")[0];
+
+(function appInitialStateShouldShowButtonText(t) {
+    const buttonText = switchButton().textContent
+    if (buttonText !== t) {
+        throw new Error("expecting button to say 'heroes'")
+    }
+})("heroes");
+
+(function appInitialStateShouldShowTwoEntries() {
+    let numberOfListItems = document.querySelectorAll("#app li").length;
+    if (numberOfListItems !== 2) {
+        throw new Error("expecting two list entries but was " + numberOfListItems)
+    }
+})();
+
+(function removingAnEntryDecreasesListSize() {
+    let initialNumberOfListItems = document.querySelectorAll("#app li").length;
+    document.querySelectorAll("#app li button")[0].click()
+    let newNumberOfListItems = document.querySelectorAll("#app li").length;
+    if (newNumberOfListItems !== initialNumberOfListItems - 1) {
+        throw new Error("expecting one less entries")
+    }
+})();
+</code>
+</pre>
+
+<button onclick="RunTest.test1()">▶ run tests</button>
+<ul id="tests"></ul>
+<br/>
+<br/>
+<div id="app"></div>
+
+
+<h3>Your Task: write another test</h3>
+e.g. that clicking the button results in the text switching to 'villains' then click
+<button onclick="showNext()">done</button>
+<script src="global.js"></script>
+<script src="11-dom.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./12-error.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

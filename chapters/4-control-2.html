@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Control Flow 2</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Loops</h1>
+do-while loops are similar, but they will execute the do block at least once
+<pre>
+<code class="language-javascript">do {
+    console.log("i'll log once")
+} while (false)
+</code>
+</pre>
+
+
+<h3>Your Task:</h3>
+<span>edit the script block of this file so all birds are removed </span><br>
+<h4>
+    <span class="bird"><img src="./bird.svg" alt="bird" /></span>
+    <span class="bird"><img src="./bird.svg" alt="bird" /></span>
+    <span class="bird"><img src="./bird.svg" alt="bird" /></span>
+    <span class="bird"><img src="./bird.svg" alt="bird" /></span>
+</h4>
+
+<script type="application/javascript">
+    const task = () => {
+        do {
+            break
+            removeBird()
+        } while (numberOfBirds() > 3)
+    };
+
+</script>
+<script src="global.js"></script>
+<script src="4-control.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./4-control-3.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

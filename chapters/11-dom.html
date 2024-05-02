@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(app.render)">
+<h1>Document Object Model (DOM)</h1>
+Using Javascript within browsers, you will most likely interact with the DOM. The DOM is a representation of what's displayed in a browser. When you look at the source of this page, you'll see a structure like:
+<pre>
+<code class="language-javascript">html
+├─ head
+│  ├─ title
+│  ├─ link
+├─ body
+│  ├─ h1
+│  ├─ span
+│  ├─ div
+</code>
+</pre>
+The DOM is a tree structure with <i>html</i> at it's root. The root has two <i>children</i> elements or nodes. You can get children by index or by using <i>nextElementSibling</i> or <i>previousElementSibling</i> methods.
+<pre>
+<code class="language-javascript">const html = document.children[0]
+// -> &lt;html&gt;...&lt;/html&gt;
+html.children
+// -> HTMLCollection(2) [head, body]
+</code>
+</pre>
+Regarding nodes vs elements: every item in the DOM is a node. elements are special nodes that have common properties. e.g.
+a <i>&lt;div class="app"&gt;hi&lt;/div&gt;</i> is a <i>div</i> element that has an attribute node representing the class name and a text node.
+
+<pre>
+<code class="language-javascript">html
+├─ ...
+├─ body
+│  ├─ div
+│  │  ├─ attribute (name="class", value="app")
+│  │  ├─ text(textContent="hi")
+</code>
+</pre>
+
+<h2>parent/child/sibling</h2>
+<pre>
+<code class="language-javascript">html
+├─ head
+│  ├─  ...
+├─ body
+│  ├─ ...
+│  ├─ div
+│  │  ├─ ul
+│  │  │  ├─ li
+│  │  │  ├─ li
+│  │  │  ├─ li
+│  │  ├─ ol
+│  │  │  ├─ li
+│  │  │  ├─ li
+│  │  │  ├─ li
+</code>
+</pre>
+selected: <span id="element"></span>
+<div id="root" class="selected">
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <ol>
+        <li>one</li>
+        <li>two</li>
+        <li>three</li>
+    </ol>
+</div>
+<button onclick="selectParent()">parent</button>
+<button onclick="selectChild()">first child</button>
+<button onclick="selectNext()">nextSibling</button>
+<button onclick="selectPrevious()">previousSibling</button>
+<script type="text/javascript">
+    const getSelected = () => document.getElementsByClassName("selected")[0];
+
+    setInterval(() => {
+        let selected = getSelected();
+        document.getElementById("element").textContent = selected.nodeName
+    } , 200)
+    const selectParent = () => {
+        let selected = getSelected();
+        if (selected.id === "root") return
+        selected.className = ""
+        selected.parentNode.className = "selected"
+    }
+    const selectChild = () => {
+        let selected = getSelected();
+        if (selected.children.length === 0) return
+        selected.className = ""
+        selected.firstElementChild.className = "selected"
+    }
+    const selectNext = () => {
+        let selected = getSelected();
+        if (selected.id === "root") return
+        if (!selected.nextElementSibling) return
+        selected.className = ""
+        selected.nextElementSibling.className = "selected"
+    }
+    const selectPrevious = () => {
+        let selected = getSelected();
+        if (selected.id === "root") return
+        if (!selected.previousElementSibling) return
+        selected.className = ""
+        selected.previousElementSibling.className = "selected"
+    }
+</script>
+<h2>render state</h2>
+single page applications leverage the DOM API to create intricate applications. A naive approach is to just render a state (create DOM elements) and rerender when something changes
+<h3>Database App</h3>
+<pre>
+<code class="language-javascript">
+    const state = {
+        heroes: ["lightning", "thunder"],
+        villains: ["fire", "brimstone"],
+        tab: "heroes"
+    }
+
+    const app = {
+        render() {
+            let e = document.getElementById("app");
+            // remove all to start from a blank slate on rerender
+            [...e.children].forEach(child => child.remove())
+            // build the switch button
+            const tabSwitch = document.createElement("button")
+            tabSwitch.textContent = state.tab
+            tabSwitch.onclick = function (ev) {
+                state.tab = state.tab === "heroes" ? "villains" : "heroes"
+                app.render()
+            }
+            // build the person list
+            const list = document.createElement("ol");
+            let persons = state.tab === "heroes" ? state.heroes : state.villains;
+            persons.forEach(s => {
+                const listItem = document.createElement("li")
+                listItem.textContent = s
+                const deleteButton = document.createElement("button")
+                deleteButton.textContent = "❌"
+                deleteButton.onclick = () => {
+                    delete persons[persons.indexOf(s)]
+                    app.render()
+                }
+                listItem.append(deleteButton)
+                list.append(listItem)
+            })
+            // add all elements into the div
+            e.append(tabSwitch, list)
+        }
+    }
+
+    app.render()
+</code>
+</pre>
+<h3>rendered app</h3>
+switch between lists and remove items
+<div id="app"></div>
+this is a very basic approach. modern javascript frameworks have much more logic regarding when, what and how to render e.g. not re-rendering everything but only things that changed, building a "shadow DOM", using the "replaceChild" method....
+
+
+<h3>Your Task: build a ToDo App</h3>
+or any other kind of example application :) then hit the button below
+<button onclick="showNext()">done</button>
+<script src="global.js"></script>
+<script src="11-dom.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./11-dom-2.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

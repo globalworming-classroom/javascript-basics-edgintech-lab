@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Arrays</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Arrays</h1>
+Javascript comes with a lot of useful objects already. We'll focus on Array, Object and Map first.
+<pre>
+<code class="language-javascript">const object = Object(); // or const object = {}
+const array = Array(); // or const array = []
+const map = new Map()
+</code>
+</pre>
+These can look and feel quite similar because you could think of them as containers for key-value pairs
+<pre>
+<code class="language-javascript">const object = { 0: "first value" }
+const array = [ "first value" ]
+const map = new Map([[0, "first value"]]);
+
+object[0] // -> 'first value'
+array[0] // -> 'first value'
+map.get(0) // -> 'first value'
+</code>
+</pre>
+
+Let's start with arrays because they are arguably the simplest. Arrays are structure to hold many things, so you can use them as lists, stacks or queues. You can construct arrays in multiple ways. Adding items will automatically increase the Arrays length.
+<pre>
+<code class="language-javascript">// initializer notation
+const array1 = ["a", "b"]
+// Array with or without new
+const array2 = new Array("a", "b")
+const array3 = Array("a", "b")
+// empty Array with defined length
+const array4 = Array(4)
+console.log(array4)
+// -> [,,,]
+const array5 = []
+console.log(array5.length)
+// -> 0
+array5[0] = "hi"
+console.log(array5.length)
+// -> 1
+</code>
+</pre>
+Array values don't have to be of the same type, though there seldom is a reason to do so. Arrays are usually for keeping a list of similar things.
+<pre>
+<code class="language-javascript">const array = ["yes", true, 1];
+for (const value of array) {
+    console.log(typeof value)
+}
+// -> string, boolean, number
+</code>
+</pre>
+But sometimes Arrays hold different things
+<pre>
+<code class="language-javascript">const entry = ["id", 244882];
+const key = entry[0]
+const value = entry[1]
+</code>
+</pre>
+
+
+<h3>Your Task:</h3>
+<span>edit the script block of this file so a food array is created</span><br>
+<h3>Food:</h3>
+<div class="foods"></div>
+
+<script type="application/javascript">
+    const task = () => {
+        // FIXME all undefined. add "apple"s
+        const foods = [,,,,,]
+        let i = 0
+        for (const food of foods) {
+            render(`${i++}: ${food}`);
+        }
+    };
+
+</script>
+<script src="global.js"></script>
+<script src="5-arrays.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./5-arrays-2.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

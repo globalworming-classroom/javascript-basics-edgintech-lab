@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Object Oriented</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Object Oriented</h1>
+We have seen objects and created specific ones already
+<pre>
+<code class="language-javascript">const alien = {"type":"alien","power":8}
+console.log(typeof alien)
+// -> object
+const hello = new Map()
+console.log(typeof hello)
+// -> object
+</code>
+</pre>
+We know that objects can have properties. But even new and empty objects have functions we can invoke without us defining anything. like <i>hasOwnProperty</i> or <i>toString</i>
+<pre>
+<code class="language-javascript">const alien = {"type":"alien","power":8}
+console.log(alien.hasOwnProperty("type")) // true
+</code>
+</pre>
+These come from the so called 'prototype', a template of properites our new objects gets
+<pre>
+<code class="language-javascript">const alien = {"type":"alien","power":8}
+// where does the 'hasOwnProperty' method come from?
+console.log(alien.hasOwnProperty("type"))
+// the alien object has a prototype which is the Object prototype
+console.log(alien.__proto__ === Object.prototype)
+// -> true
+// the prototype's hasOwnProperty attribute is a function, functions have a "toString" because their prototype
+// is also the Object prototype
+console.log(Object.prototype.hasOwnProperty.toString()
+// -> function hasOwnProperty() { [native code] }
+// other objects may have different prototypes
+console.log(Object.getPrototypeOf([]) === Array.prototype) // true
+</code>
+</pre>
+So when creating a new object, you can pick the prototype to give it some default functionality
+<pre>
+<code class="language-javascript">const defaultHero =  {
+    type:  "Mighty Hero",
+    shoutAt: function (target) {
+        console.log(`${this.name} will stand against you ${target}`)
+    }
+}
+const prototype = defaultHero
+const barbera = Object.create(prototype)
+barbera.name = "Barbera"
+barbera.shoutAt("villain")
+// -> Barbera will stand against you villain
+</code>
+</pre>
+these prototypes allow you to create hierarchies of classes. Arrays get functionality from the Array prototype which in
+turn get things from the Object prototype. With the <i>instanceof</i> operator you can check what prototypes a value has in it's prototype chain
+<pre>
+<code class="language-javascript">console.log([].__proto__ == Array.prototype) // -> true
+console.log([].__proto__.__proto__ == Object.prototype) // -> true
+console.log([] instanceof Array) // -> true
+console.log([] instanceof Object) // -> true
+</code>
+</pre>
+There are shorthands to create new objects with prototypes by calling functions with the 'new' keyword.
+<pre>
+<code class="language-javascript">function Hero(name) {
+    this.name = name;
+}
+Hero.prototype = defaultHero
+
+const fiddle = new Hero("Mighty Fiddle")
+fiddle.shoutAt("villain")
+// -> Mighty Fiddle will stand against you villain
+console.log(typeof fiddle)
+// -> object
+</code>
+</pre>
+
+Or even more convenient: use the class notation
+<pre>
+<code class="language-javascript">class Hero {
+    constructor(name) {
+        this.name = name;
+    }
+    type =  "Mighty Hero"
+    shoutAt = function (target) {
+        console.log(`${this.name} will stand against you ${target}`)
+    }
+}
+const lightning = new Hero("Lightning")
+lightning.shoutAt("villain")
+// -> Lightning will stand against you villain
+
+console.log(lightning instanceof Hero) // true
+console.log(lightning instanceof Object) // true
+</code>
+</pre>
+With the <i>class</i> keyword you build the prototype chain by <i>extending</i> classes. Compare functions and prototypes:
+<pre>
+<code class="language-javascript">// older way building the prototype chain
+function Hero() {}
+
+Hero.prototype = {
+    type: "Mighty Hero",
+    shoutAt: function (target) {
+        console.log(`this ${this.type} will stand against you ${target}`)
+    }
+}
+
+function Ancient() { this.type = "Ancient Mighty Hero" }
+Ancient.prototype = new Hero()
+
+function Timeless() { this.type = "Timeless Mighty Hero" }
+Timeless.prototype = new Ancient();
+// override behavior inherited from the prototype
+Timeless.prototype.shoutAt = function (target) {
+    console.log(`${target}! time has no meaning for us ${this.type}`)
+};
+
+(new Hero()).shoutAt("villain");    // this Mighty Hero will stand against you villain
+(new Ancient()).shoutAt("villain"); // this Ancient Mighty Hero will stand against you villain
+(new Timeless()).shoutAt("villain");// villain! time has no meaning for us Timeless Mighty Hero
+</code>
+</pre>
+The same with class and extends
+<pre>
+<code class="language-javascript">class Hero {
+    constructor() {
+        this.type = "Mighty Hero";
+    }
+    shoutAt = function (target) {
+        console.log(`this ${this.type} will stand against you ${target}`)
+    }
+}
+
+class Ancient extends Hero {
+    constructor() {
+        super();
+        this.type = "Ancient Mighty Hero"
+    }
+}
+
+class Timeless extends Ancient {
+    constructor() {
+        super();
+        this.type = "Timeless Mighty Hero"
+    }
+    // override
+    shoutAt = function (target) {
+        console.log(`${target}! time has no meaning for us ${this.type}`);
+    }
+}
+
+(new Hero()).shoutAt("villain");    // this Mighty Hero will stand against you villain
+(new Ancient()).shoutAt("villain"); // this Ancient Mighty Hero will stand against you villain
+(new Timeless()).shoutAt("villain");// villain! time has no meaning for us Timeless Mighty Hero
+</code>
+</pre>
+
+<h3>Your Task:</h3>
+<span>edit the script block of this file and build the classes</span><br>
+<h2>Superperson Hierarchy:</h2>
+<div>
+    <ul class="prototypes">
+        <li class="superperson">
+            SuperPerson is an Object<br>
+            <pre style="display: inline-flex">
+<code class="language-javascript">((new SuperPerson()) instanceof Object)</code>
+</pre>
+            <span class="check" hidden="hidden">✅</span></li>
+        <li class="elder">
+            CosmicElder is a SuperPerson<br>
+            <pre style="display: inline-flex">
+<code class="language-javascript">((new CosmicElder()) instanceof SuperPerson)</code>
+</pre>
+            <span class="check" hidden="hidden">✅</span></li>
+        <li class="superhuman">
+            SuperHuman is a SuperPerson<br>
+            <pre style="display: inline-flex">
+<code class="language-javascript">((new SuperHuman()) instanceof SuperPerson)
+    && ((new SuperHuman()).__proto__.__proto__ === SuperPerson.prototype)</code>
+</pre>
+            <span class="check" hidden="hidden">✅</span></li>
+        <li class="immortal">
+            Immortal is a SuperHuman<br>
+            <pre style="display: inline-flex">
+<code class="language-javascript">((new Immortal()) instanceof SuperHuman)
+    && ((new Immortal()).__proto__.__proto__ === SuperHuman.prototype) </code>
+</pre>
+            <span class="check" hidden="hidden">✅</span></li>
+    </ul>
+</div>
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+
+<script type="application/javascript">
+
+    // FIXME add missing classes
+    class SuperPerson {
+    }
+
+    class Immortal extends SuperPerson {
+    }
+    const task = () => {
+            checkPrototypeChain()
+    };
+
+
+    function checkPrototypeChain() {
+        ((new Immortal()) instanceof SuperHuman)
+        && ((new Immortal()).__proto__.__proto__ === SuperHuman.prototype)
+        && (document.querySelector(".immortal .check").hidden = false);
+
+        ((new SuperHuman()) instanceof SuperPerson)
+        && ((new SuperHuman()).__proto__.__proto__ === SuperPerson.prototype)
+        && (document.querySelector(".superhuman .check").hidden = false);
+
+        ((new CosmicElder()) instanceof SuperPerson)
+        && (document.querySelector(".elder .check").hidden = false);
+
+        ((new SuperPerson()) instanceof Object)
+        && (document.querySelector(".superperson .check").hidden = false); }
+</script>
+
+<script src="global.js"></script>
+<script src="9-object-oriented.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./8-functions-3.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

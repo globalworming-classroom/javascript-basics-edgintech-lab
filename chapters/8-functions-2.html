@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Functions 2</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Function Arguments</h1>
+Functions may have parameters defined within parentheses <i>( )</i>
+<pre>
+<code class="language-javascript">const findHeroByPowerLevel = function (powerLevel) {
+    console.log("searching for power level " + powerLevel)
+}
+</code>
+</pre>
+
+Arguments can be optional by setting a default values
+<pre>
+<code class="language-javascript">const findHeroByPowerLevel = (powerLevel = 1) => {
+    console.log("searching " + JSON.stringify({powerLevel}) + " ")
+}
+
+findHeroByPowerLevel(3) // searching {"powerLevel":3}
+findHeroByPowerLevel() // searching {"powerLevel":1}
+</code>
+</pre>
+Catch additional arguments with the <i>rest parameter (...)</i>
+<pre>
+<code class="language-javascript">const findHeroByPowerLevel = (powerLevel, ...more) => {
+    console.log("searching " + JSON.stringify({powerLevel, more}) + " ")
+}
+findHeroByPowerLevel(3, "ASAP", {power: "flight"})
+// -> searching {"powerLevel":3,"more":["ASAP",{"power":"flight"}]}
+</code>
+</pre>
+That is especially useful with the <i>spread operator (...)</i>, that turns individual array entries to function arguments.
+<pre>
+<code class="language-javascript">const findHeroByPowerLevelAndPowers = (powerLevel, ...powers) => {
+    console.log("searching " + JSON.stringify({powerLevel, powers}) + " ")
+}
+const requiredPowers = ["flight", "lightning"]
+findHeroByPowerLevelAndPowers(3, ...requiredPowers, "additional power");
+// searching {"powerLevel":3,"powers":["flight","lightning","additional power"]}
+</code>
+</pre>
+e.g. to concatenate arrays
+<pre>
+<code class="language-javascript">
+const lat = ["N", "S"]
+const long = ["E", "W"]
+// new Array takes all array elements as parameter
+const directions = [...lat, ...long]
+console.log(directions)
+// -> [ 'N', 'S', 'E', 'W' ]
+</code>
+</pre>
+
+<h3>Your Task:</h3>
+<span>edit the script block of this file and edit the 'addGuest' function</span><br>
+<h2>Guest Database:</h2>
+<div><ul class="guests"></ul>
+</div>
+<pre class="error"></pre>
+
+<script type="application/javascript">
+
+    const task = () => {
+        addGuest()
+        addGuest("Zoe", "fish", "nuts")
+        // FIXME need to pass name argument
+        addGuest("fish", "nuts")
+    };
+
+    // FIXME set default name
+    function addGuest(name, ...allergies) {
+        const showsGuest = document.createElement("li")
+        showsGuest.className = "guest"
+        showsGuest.textContent += `Name: ${name}`
+        if (allergies.length > 0) {
+            showsGuest.textContent +=  `, allergies: ${allergies.join(", ")}`
+        }
+
+        const showsGuests = document.getElementsByClassName("guests")[0];
+        showsGuests.append(showsGuest)
+    }
+
+</script>
+<script src="global.js"></script>
+<script src="8-functions-2.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./8-functions-3.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

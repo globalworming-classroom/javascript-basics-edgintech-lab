@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Async</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Asynchronous Execution</h1>
+Sometimes things take time and we want to do something meaningful in the meantime e.g. display a url while we have a
+long running process where we fetch alternative urls. We can simulate waiting with <i>setTimeout</i> which executes a
+function after a specified wait time
+<pre>
+<code class="language-javascript">const appUrl = "app.example.com"
+let alternativeAppUrl = undefined
+
+// query alternative url
+setTimeout(() => {
+    alternativeAppUrl = "alt.example.com"
+    console.log(alternativeAppUrl);
+}, 5000);
+console.log(appUrl)
+
+// -> app.example.com
+// -> alt.example.com
+</code>
+</pre>
+Instead of waiting for the result, we can continue execution but pass a "callback function" to execute when the result
+is ready
+<pre>
+<code class="language-javascript">const log = (it) => console.log(it);
+
+const functionWithDelayedResult = (callback) => {
+    setTimeout(() => callback("delayed result"), 1000);
+    log("function done")
+}
+console.log("execute function immediately and call callback later")
+functionWithDelayedResult(log)
+
+// -> execute function immediately and call callback later
+// -> function done
+// -> delayed result
+</code>
+</pre>
+Now if we want to chain multiple things that take time, things get hard
+<pre>
+<code class="language-javascript">const bakeCake = (callback) => {
+    // how to pass the callback?
+    mixIngredients(bake)
+}
+
+const mixIngredients = (callback) => {
+    callback()
+}
+
+const bake = (callback) => {
+    callback()
+}
+
+const doneBaking = () => {
+    console.log("done baking");
+};
+
+bakeCake(doneBaking)
+
+// -> TypeError: callback is not a function
+</code>
+</pre>
+Instead of dealing with callbacks, we create Promises, which are objects that may hold results in the future. We pass a
+handler function that when finished should call the "resolve" callback
+<pre>
+<code class="language-javascript">new Promise((resolve) => {
+    setTimeout(() => {
+        console.log("resolved")
+        resolve("done");
+    }, 1000)
+    console.log("resolving...")
+})
+
+// -> resolving...
+// -> resolved
+</code>
+</pre>
+This makes it easier to model complex "wait for result" or "execute asynchronously" dependencies. By chaining
+<i>then</i>s we create an asynchronous execution chain.
+<pre>
+<code class="language-javascript">const mixIngredients = (resolve) => {
+    console.log("mixing");
+    resolve("mix")
+}
+
+const bake = (mixedIngredients) => {
+    console.log("baking " + mixedIngredients);
+    return "cake"
+}
+
+const doneBaking = (cake) => {
+    console.log("done baking " + cake);
+};
+
+const bakeCake = (callback) => {
+    new Promise((resolve) => mixIngredients(resolve))
+        .then(mix => bake(mix))
+        .then(cake => callback(cake))
+}
+
+bakeCake(doneBaking)
+
+// -> mixing
+// -> baking mix
+// -> done baking cake
+</code>
+</pre>
+What we dont see is that the "then" method is actually creating a new promise that may resolve a value. So one promises
+handler function is invoked with the result that has been resolved from the previous Promise.
+
+
+<h3>Your Task: harvest some strawberries</h3>
+<span>edit the script block of this file to check off all the steps involved</span><br>
+<h4>How to harvest strawberries:</h4>
+<div>
+    <ul>
+        <li><span id="plant"></span> plant strawberries</li>
+        <li><span id="water"></span> water them</li>
+        <li><span id="wait"></span> wait a few months</li>
+        <li><span id="harvest"></span> harvest</li>
+    </ul>
+</div>
+
+<script type="application/javascript">
+
+    class Strawberries {
+        plant() {checkOff("plant")}
+        water() {checkOff("water")}
+        wait() {checkOff("wait")}
+        harvest() {checkOff("harvest")}
+    }
+
+    const task = () => {
+        new Promise(resolve => {
+            const strawberries = new Strawberries();
+            strawberries.plant()
+            resolve(strawberries)
+        }).then(strawberries => {
+            strawberries.wait();
+            return strawberries
+        }).then(strawberries => strawberries.harvest())
+
+    };
+</script>
+
+<script src="global.js"></script>
+<script src="10-async.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./10-async-2.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

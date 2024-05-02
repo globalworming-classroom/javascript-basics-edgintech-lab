@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Functions 3</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="setTimeout(() => showNext(), 2000)">
+<h1>Spread Operator</h1>
+Let's look a bit more at the <i>spread operator</i> because it is so useful: it spreads any iterables, making each entry a function parameter, so converting iterables to arrays is super easy
+<pre>
+<code class="language-javascript">// create keys and values arrays
+const map = new Map([["thunder", "lightning"],["fire","ice"]]);
+const keys = [...map.keys()]
+console.log(keys)
+const values = [...map.values()]
+console.log(values)
+
+// list of unique entries by using new Set()
+const entries = ["apple", "banana", "grape", "banana"]
+const uniqEntries = [...new Set(entries)]
+console.log(uniqEntries)
+
+// array of DOM elements
+const errorMessageNodes = [...document.getElementsByClassName("error")]
+console.log(errorMessageNodes)
+
+// characters in a string
+console.log([..."hello"])
+</code>
+</pre>
+Concatenate Arrays
+<pre>
+<code class="language-javascript">const lat = ["N", "S"]
+const long = ["E", "W"]
+const directions = [...lat, ...long]
+console.log(directions)
+// -> [ 'N', 'S', 'E', 'W' ]
+</code>
+</pre>
+Copy Arrays
+<pre>
+<code class="language-javascript">const source = [{"number" : 1}, {"number" : 2}, {"number" : 3}]
+const copy = [...source]
+console.log(copy)
+
+source[0].number += 1 // also changes entry of copy
+console.log(copy)
+
+source[0] = undefined // but changing one array doesn't change the other
+console.log(source)
+console.log(copy)
+</code>
+</pre>
+<script src="global.js"></script>
+
+<div id="next" hidden="hidden">
+    <a href="./9-object-oriented.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

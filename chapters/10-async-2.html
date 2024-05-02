@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Async 2</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Asynchronous Execution</h1>
+And to make things a bit more convenient, instead of dealing with creating new Promises and chaining them, we can write asynchronous code that looks like synchronous one. The <i>async</i> keyword makes a function return a Promise, the <i>await</i> is instructing execution to wait until the Promise is resolved.
+<pre>
+<code class="language-javascript">async function preheatOven() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log("preheating done")
+            resolve();
+        }, 2000)
+    })
+}
+
+async function mixIngredients() {
+    console.log("mixing done")
+}
+
+async function putCakeInOven() {
+    console.log("putting cake in oven")
+}
+
+// mixing and preheating async
+async function bakeCake() {
+    const ovenHeatPromise = preheatOven()
+    const mixPromise =  mixIngredients()
+    // both start execution immediately
+    // but we can await with Promise.all the resolution of both
+    await Promise.all([ovenHeatPromise, mixPromise])
+    putCakeInOven()
+}
+
+async function prepareTable() {
+    return new Promise((resolve) => {
+        setTimeout(() =>  {
+            console.log("table prepared")
+            resolve()
+        }, 1000)
+    })
+}
+
+console.log("start work")
+// we can bake the cake and prepare the table in the meantime, no need to wait
+bakeCake()
+prepareTable()
+
+// -> start work
+// -> mixing done
+// -> table prepared
+// -> preheating done
+// -> putting cake in oven
+</code>
+</pre>
+
+
+<h3>Your Task: same as before but with async/await</h3>
+<span>edit the script block of this file to check off all the steps involved</span><br>
+<h2>How to harvest:</h2>
+<div>
+    <ul>
+        <li><span id="plant"></span> plant strawberries</li>
+        <li><span id="water"></span> water them</li>
+        <li><span id="wait"></span> wait a few months</li>
+        <li><span id="harvest"></span> harvest</li>
+    </ul>
+</div>
+
+<script type="application/javascript">
+
+    class Strawberries {
+        async plant() { checkOff("plant")}
+        async water() { checkOff("water")}
+        async wait() { checkOff("wait")}
+        async harvest() { checkOff("harvest")}
+    }
+
+    async function plantStrawberries() {
+        const strawberries = new Strawberries();
+        await strawberries.plant()
+        return strawberries
+    }
+
+    const task = async () => {
+            const strawberries = await plantStrawberries()
+            await strawberries.water()
+            await strawberries.wait()
+    };
+
+</script>
+
+<script src="global.js"></script>
+<script src="10-async.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./11-dom.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

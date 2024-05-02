@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body>
+<h1>Welcome</h1>
+Thanks you for trying my Javascript basics tutorial.<br>
+Could you please open this file in your editor? <a
+        href="https://github.com/globalworming/javascript-basics/blob/main/README.md">how?</a><br>
+At the bottom (line number 36) you should then see code like this:
+<pre>
+    <code>&lt;script type="text/javascript"&gt;
+    document.getElementById("next").hidden = true
+&lt;/script&gt;</code>
+</pre>
+Within the <i>&lt;script&gt;</i> tag is a Javascript statement that is executed in your browser. We'll talk about that
+<i>document</i> pretty late in the tutorial. For now it should be enough to realize that this script is hiding the
+button that leads us to the next page. Change that <i>true</i> to a <i>false</i> and refresh the page in your browser to
+proceed.
+<pre>
+    <code>&lt;script type="text/javascript"&gt;
+    document.getElementById("next").hidden = false
+&lt;/script&gt;</code>
+</pre>
+
+<div id="next">
+    <a href="toc.html">next exercise</a>
+</div>
+
+<script type="text/javascript">
+    document.getElementById("next").hidden = true
+</script>
+
+<!-- fancy code highlighting -->
+<script>hljs.highlightAll();</script>
+</body>
+
+</html>

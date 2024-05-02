@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Operators 4</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Operators</h1>
+The Ternary Operator <i>?:</i> is basically acting like an "if X is true, then Y otherwise Z"
+<pre>
+<code class="language-javascript">const x = undefined
+console.log(x ? "is defined" : "is undefined") // -> "is undefined"
+const luck = 888
+console.log(luck > 100 ? "much luck" : "could be better") // -> "much luck"
+</code>
+</pre>
+Due to the logical OR returning the right side of the <i>||</i> if the left is false, you can use it for defaulting values
+<pre>
+<code class="language-javascript">const x = null
+const y = x || "not null"
+console.log(y) // -> "not null"
+</code>
+</pre>
+But due to <i>0</i> and <i>''</i> returning <i>false</i> this may lead to unintended behavior and instead of writing explicit null/undefined checks, never JavaScript has the <i>nullish coalescing operator ??</i>
+<pre>
+<code class="language-javascript">const x = 0
+// that's bad, we only want defaults for when it's actually undefined/null
+console.log(x || "some default") // -> some default
+// too long
+const y = (x !== null && x !== undefined) ? x : "some default";
+// use
+const y = x ?? "some default"
+</code>
+</pre>
+
+<h3>Your Task:</h3>
+<span>edit the script block of this file, change the comparison operations to make sure we eat pizza today</span><br>
+<h4>eat pizza today?</h4>
+<h4><span id="eat"></span>!</h4>
+
+<script type="application/javascript">
+    const task = () => {
+        const areYouHungry = "yes" ? "oh definitely yes!" : "not really"
+        const isLunchTime = undefined;
+        const eatPizza = (isLunchTime && areYouHungry) ?? !"do"
+        render(eatPizza)
+    };
+
+</script>
+
+<script src="global.js"></script>
+<script src="3-operators-4.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./4-control.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

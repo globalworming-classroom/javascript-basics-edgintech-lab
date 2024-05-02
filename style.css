@@ -1,0 +1,77 @@
+body {
+    padding: 10px 40px;
+    font-family: "Open Sans", Arial, sans-serif;
+}
+
+.loader {
+    border: 4px solid black;
+    width: 0;
+    height: 10px;
+    animation: spin 2s linear infinite;
+}
+
+.error, .jserror, #exception {
+    color: red;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+#next a {
+    position: fixed;
+    right: 30px;
+    top: 30px;
+    display: block;
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border: 0;
+    border-radius: 0.317rem;
+    background-color: #e98724;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.5;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -webkit-font-smoothing: antialiased;
+
+    animation: shake 2s linear infinite;
+
+}
+
+
+@keyframes shake {
+    0% {
+        padding: 0.75rem 1rem;
+    }
+    80% {
+        padding: 0.75rem 1rem;
+    }
+    85% {
+        padding: 0.75rem 1.7rem;
+    }
+    90% {
+        padding: 0.75rem 1.5rem;
+    }
+    95% {
+        padding: 0.75rem 1.7rem;
+    }
+}
+
+#root.selected, #root .selected {
+    border: 2px solid red;
+}
+
+#app, #root, #root div, #root li, #root ol, #root ul, #root li {
+    border: 1px solid black;
+    padding: 1px 10px;
+    margin: 1px;
+}

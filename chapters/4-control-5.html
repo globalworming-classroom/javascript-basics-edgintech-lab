@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Control Flow 3</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+</head>
+<body onload="runCatching(task)">
+<h1>Conditional</h1>
+You sometimes want to do different things. The <i>if</i> keyword with a condition in parentheses is used to
+create execution branches. The statement is only executed when the condition evaluates to true.
+<pre>
+<code class="language-javascript">if (7 < 13) console.log("7 is less than 13")
+</code>
+</pre>
+Often we need to distinguish between an expression being true or false, the "else" statement is used here
+<pre>
+<code class="language-javascript">if (Math.random() < 0.5) console.log("random number less 0.5")
+else console.log("greater or equal 0.5")
+</code>
+</pre>
+Multiple statements need to go in a block (and it's usually a good format to put single statements into curly brakets as
+well)
+<pre>
+<code class="language-javascript">if (Math.random() < 0.5) {
+    console.log("true")
+    console.log("random number less than 0.5")
+} else {
+    console.log("greater or equal 0.5")
+}
+</code>
+</pre>
+If you want to distinguish more conditions, the <i>else-if</i> blocks allow that. The inner block of the first condition that is true is executed.
+<pre>
+<code class="language-javascript">const randomNumber = Math.random()
+
+if (randomNumber < 0.5) {
+    console.log("random number less than 0.5")
+} else if (randomNumber < 0.9) {
+    console.log("less than 0.9 but bigger or equal to 0.5")
+} else {
+    console.log("greater or equal 0.9")
+}
+</code>
+</pre>
+Checking for undefined and null can be replaced with the <i>optional chaining</i> operator <i>?.</i> so property access
+will return undefined instead of throwing an error.
+<pre>
+<code class="language-javascript">const array = ["text"]
+let result;
+if (array[0]) result = array[0].toUpperCase()
+// same as
+const array = ["text"]
+let result = array[0]?.toUpperCase()
+</code>
+</pre>
+
+<div>
+    <h3>Your Task:</h3>
+    <span>edit the script block of this file so all birds are removed </span><br>
+    <span class="bird"><img src="./bird.svg" alt="bird"/>bird 1</span>
+    <span class="bird"><img src="./bird.svg" alt="bird"/>bird 2</span>
+</div>
+<script type="application/javascript">
+    const task = () => {
+
+        // FIXME <= 0? shouldn't it be greater than 0?
+        if (document.getElementsByClassName("bird").length <= 0) {
+            document.getElementsByClassName("bird").item(0)?.remove()
+        } else {
+            let newBird = document.createElement('span');
+            let img = document.createElement('img');
+            img.src = "./bird.svg"
+            newBird.append(img)
+            newBird.append("bird 3")
+            document.getElementsByClassName("bird").item(0).parentElement.appendChild(newBird)
+        }
+
+        // FIXME there is no bird 4, fix text
+        const bird = document.getElementsByClassName("bird").item(0);
+        if (bird?.textContent === "bird 4") {
+            bird.remove()
+        }
+
+
+    };
+</script>
+
+<script src="global.js"></script>
+<script src="4-control.js"></script>
+
+<pre class="jserror"></pre>
+<pre class="error"></pre>
+<div id="next" hidden="hidden">
+    <a href="./4-control-4.html">next</a>
+</div>
+<script>hljs.highlightAll();</script>
+</body>
+</html>
